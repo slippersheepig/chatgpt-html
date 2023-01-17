@@ -11,6 +11,8 @@ parent_dir = Path(__file__).resolve().parent
 config = dotenv_values(f"{parent_dir}/.env")
 
 # init chatbot
+# 根据认证方式的不同，以下代码可作修改，例如使用微软登录认证，则改为chatbot = ChatGPT(auth_type='microsoft', email='config["EMAIL"]', password='config["PASSWORD"]')
+# 同时.env文件中将SESSION_TOKEN替换为EMAIL及
 chatbot = ChatGPT(config["SESSION_TOKEN"])
 
 def send_gpt(message):

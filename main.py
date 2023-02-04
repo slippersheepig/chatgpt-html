@@ -1,23 +1,22 @@
-import os
-from pathlib import Path
-from dotenv import dotenv_values
-from pyChatGPT import ChatGPT
+import openai
 from flask import Flask, request, render_template, redirect
 
 server = Flask(__name__)
 
-# get config
-parent_dir = Path(__file__).resolve().parent
-config = dotenv_values(f"{parent_dir}/.env")
+def get_completion(question):
+    try:
+        response = openai.Completion.create(
+            engine="text-chat-davinci-002-20221122",
+            prompt=f"{question}\n",
+            temperature=0.5,
+            max_tokens=4000,
+            stop=None
+        )
+    except Exception as e:
 
-# init chatbot
-# 根据认证方式的不同，以下代码可作修改，例如使用微软登录认证，则改为chatbot = ChatGPT(auth_type='microsoft', email='config["EMAIL"]', password='config["PASSWORD"]')
-# 同时.env文件中将SESSION_TOKEN替换为EMAIL及PASSWORD
-chatbot = ChatGPT(config["SESSION_TOKEN"])
-
-def send_gpt(message):
-    response = chatbot.send_message(message)
-    return response['message']
+        print(e)
+        return e
+    return response["choices"][0]["text"].rstrip("<|im_end|>")
 
 @server.route('/', methods=['GET', 'POST'])
 def get_request_json():
@@ -28,7 +27,7 @@ def get_request_json():
         question = request.form['question']
         print("======================================")
         print("接到请求:", question)
-        res = send_gpt(question)
+        res = get_completion(question)
         print("问题：\n", question)
         print("答案：\n", res)
 

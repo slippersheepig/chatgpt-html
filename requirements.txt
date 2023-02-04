@@ -1,6 +1,4 @@
-pyChatGPT
-python-dotenv
-PyVirtualDisplay
+openai
 flask
 gunicorn
 gevent

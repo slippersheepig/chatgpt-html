@@ -1,27 +1,20 @@
 # chatgpt-html
-### 使用terry3041的非官方ChatGPT接口，实现简单HTML网页版在线聊天
+### 使用acheong08的官方ChatGPT接口，实现简单HTML网页版在线聊天
 
 > 该版本基于`ChatGPT`开发，想使用OPENAI API KEY的请访问[chatgpt-web](https://github.com/slippersheepig/chatgpt-web)
 
 #### 项目由来及一些说明
 - 想在html实现人人可访问的ChatGPT网页应用
-- 因为需要模拟浏览器登录，docker镜像体积比较大，并消耗较多系统资源
 - ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话
-- 本项目仅采用`SESSION_TOKEN`作为ChatGPT登录参数，存在会话过期的可能性，更多替代参数请参考[pyChatGPT](https://github.com/terry3041/pyChatGPT)，我也会在py文件注明
-- 如更改了项目代码，建议自行使用Dockerfile构建镜像
 - ChatGPT的回复内容比OPENAI API KEY更`自然`，特别是面对复杂表达或场景时，下图为例
 ![S{_0)XRVDB(3)SKFR$4P7VV](https://user-images.githubusercontent.com/58287293/212858122-1e3c72f5-5f40-4ff8-8e12-3cfb64b3b543.png)
 
 ## 部署
-### 获取SESSION_TOKEN
-- 参考[pyChatGPT](https://github.com/terry3041/pyChatGPT)中Usage-Obtaining session_token部分
+### 获取OpenAI API KEY
+- 建议参考[此教程](https://blog.csdn.net/hekaiyou/article/details/128303729)获取
 ### 配置
 #### 使用Docker Compose
-> 以下所有文件放同一目录
-- 新建`.env`文件，粘贴以下代码并保存
-```bash
-SESSION_TOKEN="前面获取到的SESSION_TOKEN"
-```
+> 以下文件放同一目录
 - 新建`chat.html`网页文件，粘贴以下代码并保存（UI很丑，建议各自美化）
 ```html
 <!DOCTYPE html>
@@ -86,10 +79,11 @@ SESSION_TOKEN="前面获取到的SESSION_TOKEN"
 version: '3'
 services:
   chatgpt:
-    image: sheepgreen/chatgpt-html
+    image: sheepgreen/chatgpt-html:api #如果是arm，请换成chatgpt-html:apiarm
     container_name: htmchat
+    environment:
+      - OPENAI_API_KEY=前面你获取到的OpenAI API KEY
     volumes:
-      - ./.env:/chatgpt-html/.env
       - ./chat.html:/chatgpt-html/templates/chat.html
     ports:
       - "9999:80" #80为容器内部端口，9999为外部映射端口，可自行更改
@@ -99,4 +93,3 @@ services:
 ## 注意事项
 - 访问地址为http://ip:port
 - 修改`chat.html`文件后，需要docker restart htmchat才能生效
-- 暂仅支持amd64镜像

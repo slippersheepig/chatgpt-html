@@ -1,3 +1,5 @@
+> **Warning**
+> 因为openai更新了新的cloudflare保护，暂时失效
 # chatgpt-html
 ### 使用terry3041的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 

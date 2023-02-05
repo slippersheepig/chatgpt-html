@@ -81,10 +81,9 @@ services:
   chatgpt:
     image: sheepgreen/chatgpt-html:api #如果是arm，请换成chatgpt-html:apiarm
     container_name: htmchat
-    environment:
-      - OPENAI_API_KEY=前面你获取到的OpenAI API KEY
     volumes:
-      - ./chat.html:/chatgpt-html/templates/chat.html
+      - ./.env:/home/appuser/.env
+      - ./chat.html:/home/appuser/templates/chat.html
     ports:
       - "9999:80" #80为容器内部端口，9999为外部映射端口，可自行更改
     restart: always

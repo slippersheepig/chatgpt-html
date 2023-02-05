@@ -1,22 +1,21 @@
-import openai
+import os
+from pathlib import Path
+from dotenv import dotenv_values
+from revChatGPT.Official import Chatbot
 from flask import Flask, request, render_template, redirect
 
 server = Flask(__name__)
 
-def get_completion(question):
-    try:
-        response = openai.Completion.create(
-            engine="text-chat-davinci-002-20221122",
-            prompt=f"{question}\n",
-            temperature=0.5,
-            max_tokens=4000,
-            stop=None
-        )
-    except Exception as e:
+# get config
+parent_dir = Path(__file__).resolve().parent
+config = dotenv_values(f"{parent_dir}/.env")
 
-        print(e)
-        return e
-    return response["choices"][0]["text"].rstrip("<|im_end|>")
+# init chatbot
+chatbot = Chatbot(config["OPENAI_API_KEY"])
+
+def send_gpt(message):
+    response = chatbot.ask(message)
+    return response["choices"][0]["text"]
 
 @server.route('/', methods=['GET', 'POST'])
 def get_request_json():
@@ -27,7 +26,7 @@ def get_request_json():
         question = request.form['question']
         print("======================================")
         print("接到请求:", question)
-        res = get_completion(question)
+        res = send_gpt(question)
         print("问题：\n", question)
         print("答案：\n", res)
 

@@ -15,6 +15,10 @@
 ### 配置
 #### 使用Docker Compose
 > 以下文件放同一目录
+- 新建`.env`文件，粘贴以下代码并保存
+```bash
+OPENAI_API_KEY="前面获取到的OpenAI API KEY"
+```
 - 新建`chat.html`网页文件，粘贴以下代码并保存（UI很丑，建议各自美化）
 ```html
 <!DOCTYPE html>

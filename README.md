@@ -1,7 +1,7 @@
-> **Warning**
-> 因为openai更新了新的cloudflare保护，暂时失效
+> 2023.2.11更新
+> 更换为acheong08的非官方ChatGPT接口
 # chatgpt-html
-### 使用terry3041的非官方ChatGPT接口，实现简单HTML网页版在线聊天
+### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 
 > 该版本基于`ChatGPT`开发，想使用OPENAI API KEY的请访问[chatgpt-web](https://github.com/slippersheepig/chatgpt-web)
 
@@ -9,20 +9,22 @@
 - 想在html实现人人可访问的ChatGPT网页应用
 - 因为需要模拟浏览器登录，docker镜像体积比较大，并消耗较多系统资源
 - ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话
-- 本项目仅采用`SESSION_TOKEN`作为ChatGPT登录参数，存在会话过期的可能性，更多替代参数请参考[pyChatGPT](https://github.com/terry3041/pyChatGPT)，我也会在py文件注明
 - 如更改了项目代码，建议自行使用Dockerfile构建镜像
 - ChatGPT的回复内容比OPENAI API KEY更`自然`，特别是面对复杂表达或场景时，下图为例
 ![S{_0)XRVDB(3)SKFR$4P7VV](https://user-images.githubusercontent.com/58287293/212858122-1e3c72f5-5f40-4ff8-8e12-3cfb64b3b543.png)
 
 ## 部署
-### 获取SESSION_TOKEN
-- 参考[pyChatGPT](https://github.com/terry3041/pyChatGPT)中Usage-Obtaining session_token部分
+### 获取OpenAI账号（即邮箱）及密码（`请使用普通方式注册，不要谷歌或者微软快捷登录`）
+- 点击注册[OpenAI](https://platform.openai.com/)
 ### 配置
 #### 使用Docker Compose
 > 以下所有文件放同一目录
-- 新建`.env`文件，粘贴以下代码并保存
+- 新建`config.json`文件，粘贴以下代码并保存
 ```bash
-SESSION_TOKEN="前面获取到的SESSION_TOKEN"
+{
+        "email": "填写你的OpenAI账号（即邮箱）",
+        "password": "填写你的OpenAI密码"
+}
 ```
 - 新建`chat.html`网页文件，粘贴以下代码并保存（UI很丑，建议各自美化）
 ```html
@@ -91,10 +93,10 @@ services:
     image: sheepgreen/chatgpt-html
     container_name: htmchat
     volumes:
-      - ./.env:/chatgpt-html/.env
+      - ./config.json:/chatgpt-html/config.json
       - ./chat.html:/chatgpt-html/templates/chat.html
     ports:
-      - "9999:80" #80为容器内部端口，9999为外部映射端口，可自行更改
+      - "9999:80" #80为容器内部端口，不可更改；9999为外部映射端口，可自行更改
     restart: always
 ```
 - 输入`docker-compose up -d`即启动成功

@@ -1,6 +1,4 @@
-pyChatGPT
-python-dotenv
-PyVirtualDisplay
+revChatGPT
 flask
 gunicorn
 gevent

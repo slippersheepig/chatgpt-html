@@ -1,3 +1,5 @@
+> **Warning**
+> 此项目已失效，除非有旧的官方API泄露或新的官方API发布
 # chatgpt-html
 ### 使用acheong08的官方ChatGPT接口，实现简单HTML网页版在线聊天
 

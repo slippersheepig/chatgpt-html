@@ -1,23 +1,19 @@
 import os
-from pathlib import Path
-from dotenv import dotenv_values
-from pyChatGPT import ChatGPT
+import json
+from revChatGPT.Unofficial import Chatbot
 from flask import Flask, request, render_template, redirect
 
 server = Flask(__name__)
 
 # get config
-parent_dir = Path(__file__).resolve().parent
-config = dotenv_values(f"{parent_dir}/.env")
+with open("config.json", "r") as f: config = json.load(f)
 
 # init chatbot
-# 根据认证方式的不同，以下代码可作修改，例如使用微软登录认证，则改为chatbot = ChatGPT(auth_type='microsoft', email='config["EMAIL"]', password='config["PASSWORD"]')
-# 同时.env文件中将SESSION_TOKEN替换为EMAIL及PASSWORD
-chatbot = ChatGPT(config["SESSION_TOKEN"])
+chatbot = Chatbot(config)
 
 def send_gpt(message):
-    response = chatbot.send_message(message)
-    return response['message']
+    response = chatbot.ask(message)
+    return response["message"]
 
 @server.route('/', methods=['GET', 'POST'])
 def get_request_json():

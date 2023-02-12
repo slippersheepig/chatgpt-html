@@ -8,7 +8,7 @@
 #### 项目由来及一些说明
 - 想在html实现人人可访问的ChatGPT网页应用
 - 因为需要模拟浏览器登录，docker镜像体积比较大，并消耗较多系统资源
-- ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话
+- ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话（`回复内容是上下文关联的，但是每次提交后只能显示最新的回复，没有历史记录`）
 - 如更改了项目代码，建议自行使用Dockerfile构建镜像
 - ChatGPT的回复内容比OPENAI API KEY更`自然`，特别是面对复杂表达或场景时，下图为例
 ![S{_0)XRVDB(3)SKFR$4P7VV](https://user-images.githubusercontent.com/58287293/212858122-1e3c72f5-5f40-4ff8-8e12-3cfb64b3b543.png)

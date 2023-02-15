@@ -1,6 +1,4 @@
-`日常负载爆炸，建议有能力的自行搭建`
-> 2023.2.11更新
-> 更换为acheong08的非官方ChatGPT接口
+> 使用acheong08最新的代理接口，大幅减轻服务器负载
 # chatgpt-html
 ### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 
@@ -8,7 +6,7 @@
 
 #### 项目由来及一些说明
 - 想在html实现人人可访问的ChatGPT网页应用
-- 因为需要模拟浏览器登录，docker镜像体积比较大，并消耗较多系统资源
+- `通过连接代理服务器响应ChatGPT请求，客户端无需模拟浏览器登录，代理服务端建议自行搭建（作者未公开方法，但在作者github可以找到，出于对作者的尊敬此处也不公开，请自行查找）`
 - ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话（`回复内容是上下文关联的，但是每次提交后只能显示最新的回复，没有历史记录`）
 - 如更改了项目代码，建议自行使用Dockerfile构建镜像
 - ChatGPT的回复内容比OPENAI API KEY更`自然`，特别是面对复杂表达或场景时，下图为例
@@ -88,20 +86,20 @@
 ```
 - 新建`docker-compose.yml`配置文件，粘贴以下内容并保存
 ```bash
-version: '3'
 services:
   chatgpt:
-    image: sheepgreen/chatgpt-html
+    image: sheepgreen/chatgpt-html:proxy #如果是arm架构，请换成chatgpt-html:proxyarm
     container_name: htmchat
+#    environment:
+#      - CHATGPT_BASE_URL=你的代理服务端地址（不填默认使用作者服务器，目前偶尔会不可用）
     volumes:
       - ./config.json:/chatgpt-html/config.json
       - ./chat.html:/chatgpt-html/templates/chat.html
     ports:
-      - "9999:80" #80为容器内部端口，不可更改；9999为外部映射端口，可自行更改
+      - "9999:80"
     restart: always
 ```
 - 输入`docker-compose up -d`即启动成功
 ## 注意事项
 - 访问地址为http://ip:port
 - 修改`chat.html`文件后，需要docker restart htmchat才能生效
-- 暂仅支持amd64镜像

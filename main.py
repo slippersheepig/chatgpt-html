@@ -14,8 +14,8 @@ chatbot = Chatbot(config)
 def send_gpt(message):
     prev_text = ""
     for data in chatbot.ask(message):
-        response = data["message"][len(prev_text) :]
-    return response
+        prev_text = prev_text + data["message"][len(prev_text) :]
+    return prev_text
 
 @server.route('/', methods=['GET', 'POST'])
 def get_request_json():

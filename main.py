@@ -1,6 +1,6 @@
 import os
 import json
-from revChatGPT.Unofficial import Chatbot
+from revChatGPT.V1 import Chatbot
 from flask import Flask, request, render_template, redirect
 
 server = Flask(__name__)
@@ -12,8 +12,10 @@ with open("config.json", "r") as f: config = json.load(f)
 chatbot = Chatbot(config)
 
 def send_gpt(message):
-    response = chatbot.ask(message)
-    return response["message"]
+    prev_text = ""
+    for data in chatbot.ask(message):
+        response = data["message"][len(prev_text) :]
+    return response
 
 @server.route('/', methods=['GET', 'POST'])
 def get_request_json():

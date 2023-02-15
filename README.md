@@ -1,4 +1,4 @@
-> 使用acheong08最新的代理接口，大幅减轻服务器负载
+> 使用acheong08最新的代理接口，大幅减轻服务器负载，客户端可在国内搭建（如需境外本地搭建，请切换main分支）
 # chatgpt-html
 ### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 
@@ -96,7 +96,7 @@ services:
       - ./config.json:/chatgpt-html/config.json
       - ./chat.html:/chatgpt-html/templates/chat.html
     ports:
-      - "9999:80"
+      - "9999:80" #80为容器内端口，不可更换；9999为外部端口，可自行更换
     restart: always
 ```
 - 输入`docker-compose up -d`即启动成功

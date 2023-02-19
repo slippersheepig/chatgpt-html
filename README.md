@@ -88,7 +88,6 @@
 ```
 - 新建`docker-compose.yml`配置文件，粘贴以下内容并保存
 ```bash
-version: '3'
 services:
   chatgpt:
     image: sheepgreen/chatgpt-html

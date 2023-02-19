@@ -96,7 +96,7 @@ services:
       - ./config.json:/chatgpt-html/config.json
       - ./chat.html:/chatgpt-html/templates/chat.html
     ports:
-      - "9999:80" #80为容器内端口，不可更换；9999为外部端口，可自行更换
+      - "9999:8088" #8088为容器内端口，不可更换；9999为外部端口，可自行更换
     restart: always
 ```
 - 输入`docker-compose up -d`即启动成功

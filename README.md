@@ -33,12 +33,20 @@
         "access_token": "<access_token>"
         
         //以下为选填字段
-        //通过代理连接代理端（作者服务器被墙过）
-        "proxy": "..."
-        //使用付费openai账号
-        "paid": true
+        //通过代理连接代理端（作者服务器被墙过，代理好像只能用无密码认证的socks5或者http，请自行测试）
+        # "proxy": "..."
+        //使用付费openai账号（官方称速度更快，无频率限制）
+        # "paid": true
 }
 ```
+ - session_token获取方法（随时过期）
+1. Go to https://chat.openai.com/chat and open the developer tools by `F12`.
+2. Find the `__Secure-next-auth.session-token` cookie in `Application` > `Storage` > `Cookies` > `https://chat.openai.com`.
+3. Copy the value in the `Cookie Value` field.
+ - access_token获取方法
+
+登录ChatGPT官方网页版后再打开https://chat.openai.com/api/auth/session 
+
 - 新建`docker-compose.yml`配置文件，粘贴以下内容并保存
 ```bash
 services:

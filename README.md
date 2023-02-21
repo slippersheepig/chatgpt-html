@@ -43,7 +43,7 @@
 1. Go to https://chat.openai.com/chat and open the developer tools by `F12`.
 2. Find the `__Secure-next-auth.session-token` cookie in `Application` > `Storage` > `Cookies` > `https://chat.openai.com`.
 3. Copy the value in the `Cookie Value` field.
- - access_token获取方法
+ - access_token获取方法（据说可以持续2周不过期）
 
 登录ChatGPT官方网页版后再打开https://chat.openai.com/api/auth/session 
 

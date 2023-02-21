@@ -1,6 +1,5 @@
-`日常负载爆炸，建议有能力的自行搭建`
-> 2023.2.11更新
-> 更换为acheong08的非官方ChatGPT接口
+> **Warning**
+`cloudflare已patched，此分支失效`
 # chatgpt-html
 ### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 

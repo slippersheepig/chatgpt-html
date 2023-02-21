@@ -23,8 +23,20 @@
 - 新建`config.json`文件，粘贴以下代码并保存
 ```bash
 {
+        //邮箱、session_token和access_token三选一，不用的注释或删掉，注意最后一行删掉逗号
+        //邮箱认证
         "email": "填写你的OpenAI账号（即邮箱）",
         "password": "填写你的OpenAI密码"
+        //session_token认证
+        "session_token": "..."
+        //access_token认证
+        "access_token": "<access_token>"
+        
+        //以下为选填字段
+        //通过代理连接代理端（作者服务器被墙过）
+        "proxy": "..."
+        //使用付费openai账号
+        "paid": true
 }
 ```
 - 新建`docker-compose.yml`配置文件，粘贴以下内容并保存

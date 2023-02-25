@@ -1,7 +1,6 @@
 # Update
  - 2023.2.20 `支持markdown语法`
  - 2023.2.19 `重构关键代码，内置本人使用的UI，支持查看连续对话记录`
-> 使用acheong08最新的代理接口，大幅减轻服务器负载，客户端可在国内搭建（如需境外本地搭建，请切换main分支）
 # chatgpt-html
 ### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
 

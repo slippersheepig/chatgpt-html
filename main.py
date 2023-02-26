@@ -11,10 +11,10 @@ with open("config.json", "r") as f: config = json.load(f)
 chatbot = Chatbot(config)
 
 def generate_response(prompt):
-    prev_text = ""
+    response = ""
     for data in chatbot.ask(prompt):
-        prev_text = prev_text + data["message"][len(prev_text) :]
-    return prev_text
+        response = data["message"]
+    return response
 
 @server.route("/")
 def home():

@@ -25,7 +25,7 @@ document.getElementById("sendbutton").addEventListener("click", function () {
         document.getElementById("chatinput").value = "";
         // Send the message to the chatbot
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/chat/get?msg=" + message);
+        xhr.open("GET", "/get?msg=" + message);
         xhr.send();
         xhr.onload = function () {
             // Append the chatbot's response to the chatlog

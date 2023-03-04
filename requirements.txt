@@ -1,3 +1,4 @@
+revchatgpt==3.0.2
 flask
 gunicorn
 gevent

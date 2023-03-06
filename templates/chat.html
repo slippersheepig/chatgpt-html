@@ -2,55 +2,38 @@
 <html lang="en">
 
 <!--自适应屏幕大小-->
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="使用ChatGPT接口，实现简单HTML网页版在线聊天"/>
 <head>
-    <!-- <link rel="shortcut icon" href="" type="image/x-icon" /> -->
     <meta charset="UTF-8">
     <title>ChatGPT</title>
-    <style>
-      body {
-        color: #333;
-        background-color: #eee;
-      }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: black;
-        color: white;
-      }
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <div align="center">
-        <h2>ChatGPT</h2>
-        <div>注意：接口返回可能比较慢（服务在国外，并且ChatGPT返回速度也比较慢），提交后需要等待处理完成，请勿重复提交！！！</div>
-        <div>~接口返回有长度限制~</div>
-        <hr />
-        {% if message %} {{ message }} {% endif %}
-        <form method="post" onsubmit="submit.disabled=true">
-            <textarea style="width:35%;" name="question" placeholder="点击这里输入问题" rows="11" id="form"></textarea>
-            <br>
-            <input type="submit" style="width:150px;height:50px;background-color:green;font-size:30px" value="提交" id="submit" />
-        </form>
-        <div id="loading" style="display:none; color:red"><b>后端正在处理，请稍等...</b></div>
-        {% if question %}
-        <div style="text-align: left"><b>人类:</b>
-            <pre id="question">{{ question }}</pre>
+<div align="center">
+    <div class="chat_window">
+        <div class="top_menu">
+            <div class="buttons">
+                <div class="button close"></div>
+                <div class="button minimize"></div>
+                <div class="button maximize"></div>
+            </div>
+            <div class="title">ChatGPT</div>
         </div>
-        <hr />
-        <div style="text-align: left"><b>人工智障:</b>
-            <pre style="text-align:left; white-space: pre-wrap;" id="res">{{ res }}</pre>
+        <div id="loading" style="display:none; color:red"><b>后端正在处理，请稍等，切勿重复提交<br>若3分钟内无响应则说明请求超时，可刷新网页重新提交</b></div>
+        <ul class="messages">
+            <div style="text-align: left; color: green">
+                <pre style="white-space: pre-wrap; word-wrap:break-word" id="chatlog"></pre>
+            </div>
+        </ul>
+        <div class="bottom_wrapper clearfix">
+            <textarea class="message_input_wrapper" placeholder="点击这里输入问题" id="chatinput"></textarea>
+            <button class="send_message" id="sendbutton">提交</button>
         </div>
-        {% endif %}
     </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-<script>
-    let loading = document.getElementById('loading');
-    let form = document.querySelector('form');
-    form.addEventListener('submit', () => {
-        loading.style.display = 'block';
-    });
-</script>
 </html>

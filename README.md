@@ -45,7 +45,7 @@
 ```bash
 services:
   chatgpt:
-    image: sheepgreen/chatgpt-html:proxy #如果是arm架构，请换成chatgpt-html:proxyarm
+    image: sheepgreen/chatgpt-html #如果是arm架构，请换成chatgpt-html:arm
     container_name: htmchat
     volumes:
       - ./config.json:/chatgpt-html/config.json

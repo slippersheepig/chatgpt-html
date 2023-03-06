@@ -11,10 +11,13 @@ with open("config.json", "r") as f: config = json.load(f)
 chatbot = Chatbot(config)
 
 def generate_response(prompt):
-    response = ""
-    for data in chatbot.ask(prompt):
-        response = data["message"]
-    return response
+    try:
+        response = ""
+        for data in chatbot.ask(prompt):
+            response = data["message"]
+        return response
+    except Exception as e:
+        return e
 
 @server.route("/")
 def home():

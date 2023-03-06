@@ -1,20 +1,15 @@
-> **Warning**
-`cloudflare已patched，此分支失效`
+# Update
+ - 2023.3.6 作者删除了浏览器模拟登录版本，后续也把官方endpoint公开了，故将主分支做一次大更新（由于“被迫”安装了无用的依赖，此主分支的镜像体积比[proxy分支](https://github.com/slippersheepig/chatgpt-html/tree/proxy)约大10倍，但是相比有bug被修复，镜像大点倒也无所谓了）
+ - 2023.3.3 现支持按回车发送问题请求，按shift+回车可换行输入文本
++ 2023.2.28 关于OPENAI允许问题的最大长度
+  + 根据OPENAI官方[问答](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)"Depending on the [model](https://platform.openai.com/docs/models/gpt-3) used, requests can use up to 4097 tokens shared between prompt and completion. If your prompt is 4000 tokens, your completion can be 97 tokens at most"，虽然没有明确指出ChatGPT模型是否也适用，但结合谷歌搜索的结果，应该一样。问题和回答加起来的总长度无法超过4097个token，如果你不清楚自己问题的长度，可以使用[官方计数器](https://platform.openai.com/tokenizer)
+ - 2023.2.20 `支持markdown语法`
+ - 2023.2.19 `重构关键代码，内置本人使用的UI，支持查看连续对话记录`
 # chatgpt-html
-### 使用[acheong08](https://github.com/acheong08/ChatGPT)的非官方ChatGPT接口，实现简单HTML网页版在线聊天
-
-> 该版本基于`ChatGPT`开发，想使用OPENAI API KEY的请访问[chatgpt-web](https://github.com/slippersheepig/chatgpt-web)
-
-#### 项目由来及一些说明
-- 想在html实现人人可访问的ChatGPT网页应用
-- 因为需要模拟浏览器登录，docker镜像体积比较大，并消耗较多系统资源
-- ChatGPT本身支持上下文关联，但个人技术菜鸡，无法在html编写连续对话（`回复内容是上下文关联的，但是每次提交后只能显示最新的回复，没有历史记录`）
-- 如更改了项目代码，建议自行使用Dockerfile构建镜像
-- ChatGPT的回复内容比OPENAI API KEY更`自然`，特别是面对复杂表达或场景时，下图为例
-![S{_0)XRVDB(3)SKFR$4P7VV](https://user-images.githubusercontent.com/58287293/212858122-1e3c72f5-5f40-4ff8-8e12-3cfb64b3b543.png)
-
+### 使用[acheong08](https://github.com/acheong08/ChatGPT)对接官方ChatGPT接口，实现简单HTML网页版在线聊天
+> 该版本基于`ChatGPT`网页端代理开发（免费），想使用ChatGPT API KEY（付费）的请访问[chatgpt-web](https://github.com/slippersheepig/chatgpt-web)
 ## 部署
-### 获取OpenAI账号（即邮箱）及密码（`请使用普通方式注册，不要谷歌或者微软快捷登录`）
+### 获取OpenAI账号（即邮箱）及密码（`请使用普通方式注册，不支持谷歌或者微软快捷登录`）
 - 点击注册[OpenAI](https://platform.openai.com/)
 ### 配置
 #### 使用Docker Compose
@@ -22,84 +17,44 @@
 - 新建`config.json`文件，粘贴以下代码并保存
 ```bash
 {
+        //邮箱、session_token和access_token三选一，不用的注释或删掉，注意最后一行删掉逗号
+        //邮箱认证
         "email": "填写你的OpenAI账号（即邮箱）",
         "password": "填写你的OpenAI密码"
+        //session_token认证
+        "session_token": "..."
+        //access_token认证
+        "access_token": "<access_token>"
+        
+        //以下为选填字段
+        //通过代理连接代理端（作者服务器被墙过，代理好像只能用无密码认证的socks5或者http，请自行测试）
+        //# "proxy": "..."
+        //使用付费openai账号（官方称速度更快，无频率限制）
+        //# "paid": true
 }
 ```
-- 新建`chat.html`网页文件，粘贴以下代码并保存（UI很丑，建议各自美化）
-```html
-<!DOCTYPE html>
-<html lang="en">
+ - session_token获取方法（随时过期）
+1. Go to https://chat.openai.com/chat and open the developer tools by `F12`.
+2. Find the `__Secure-next-auth.session-token` cookie in `Application` > `Storage` > `Cookies` > `https://chat.openai.com`.
+3. Copy the value in the `Cookie Value` field.
+ - access_token获取方法（据说可以持续2周不过期）
 
-<!--自适应屏幕大小-->
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+登录ChatGPT官方网页版后再打开https://chat.openai.com/api/auth/session 
 
-<head>
-    <!-- <link rel="shortcut icon" href="" type="image/x-icon" /> -->
-    <meta charset="UTF-8">
-    <title>ChatGPT</title>
-    <style>
-      body {
-        color: #333;
-        background-color: #eee;
-      }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: black;
-        color: white;
-      }
-    }
-    </style>
-</head>
-
-<body>
-    <div align="center">
-        <h2>ChatGPT</h2>
-        <div>注意：接口返回可能比较慢（服务在国外，并且ChatGPT返回速度也比较慢），提交后需要等待处理完成，请勿重复提交！！！</div>
-        <div>~接口返回有长度限制~</div>
-        <hr />
-        {% if message %} {{ message }} {% endif %}
-        <form method="post" onsubmit="submit.disabled=true">
-            <textarea style="width:35%;" name="question" placeholder="点击这里输入问题" rows="11" id="form"></textarea>
-            <br>
-            <input type="submit" style="width:150px;height:50px;background-color:green;font-size:30px" value="提交" id="submit" />
-        </form>
-        <div id="loading" style="display:none; color:red"><b>后端正在处理，请稍等...</b></div>
-        {% if question %}
-        <div style="text-align: left"><b>人类:</b>
-            <pre id="question">{{ question }}</pre>
-        </div>
-        <hr />
-        <div style="text-align: left"><b>人工智障:</b>
-            <pre style="text-align:left; white-space: pre-wrap;" id="res">{{ res }}</pre>
-        </div>
-        {% endif %}
-    </div>
-</body>
-<script>
-    let loading = document.getElementById('loading');
-    let form = document.querySelector('form');
-    form.addEventListener('submit', () => {
-        loading.style.display = 'block';
-    });
-</script>
-</html>
-```
 - 新建`docker-compose.yml`配置文件，粘贴以下内容并保存
 ```bash
 services:
   chatgpt:
-    image: sheepgreen/chatgpt-html
+    image: sheepgreen/chatgpt-html:proxy #如果是arm架构，请换成chatgpt-html:proxyarm
     container_name: htmchat
     volumes:
       - ./config.json:/chatgpt-html/config.json
-      - ./chat.html:/chatgpt-html/templates/chat.html
+#      - ./chat.html:/chatgpt-html/templates/chat.html #默认内置我的UI，如需替换自用网页请取消注释
     ports:
-      - "9999:80" #80为容器内部端口，不可更改；9999为外部映射端口，可自行更改
+      - "9999:8088" #8088为容器内端口，不可更换；9999为外部端口，可自行更换
     restart: always
 ```
 - 输入`docker-compose up -d`即启动成功
 ## 注意事项
 - 访问地址为http://ip:port
 - 修改`chat.html`文件后，需要docker restart htmchat才能生效
-- 暂仅支持amd64镜像

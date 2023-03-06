@@ -1,6 +1,5 @@
-import os
 import json
-from revChatGPT.Unofficial import Chatbot
+from revChatGPT.V1 import Chatbot
 from flask import Flask, request, render_template, redirect
 
 server = Flask(__name__)
@@ -11,25 +10,23 @@ with open("config.json", "r") as f: config = json.load(f)
 # init chatbot
 chatbot = Chatbot(config)
 
-def send_gpt(message):
-    response = chatbot.ask(message)
-    return response["message"]
+def generate_response(prompt):
+    try:
+        response = ""
+        for data in chatbot.ask(prompt):
+            response = data["message"]
+        return response
+    except Exception as e:
+        return e
 
-@server.route('/', methods=['GET', 'POST'])
-def get_request_json():
-    if request.method == 'POST':
-        if len(request.form['question']) < 1:
-            return render_template(
-                'chat.html', question="null", res="问题不能为空")
-        question = request.form['question']
-        print("======================================")
-        print("接到请求:", question)
-        res = send_gpt(question)
-        print("问题：\n", question)
-        print("答案：\n", res)
+@server.route("/")
+def home():
+    return render_template("chat.html")
 
-        return render_template('chat.html', question=question, res=str(res))
-    return render_template('chat.html', question=0)
+@server.route("/get")
+def get_bot_response():
+    user_text = request.args.get('msg')
+    return str(generate_response(user_text))
 
 if __name__ == '__main__':
-    server.run(debug=True, host='0.0.0.0', port=80)
+    server.run(debug=False, host='0.0.0.0', port=8088)

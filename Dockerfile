@@ -1,14 +1,12 @@
-FROM python:slim
+FROM rust:slim-bookworm
 
-RUN apt update && apt install chromium xvfb xauth -y
+RUN apt update && apt install pip -y
 
+RUN useradd -m appuser
+USER appuser
 WORKDIR /chatgpt-html
-ENV PATH="${PATH}:/usr/local/bin:/usr/bin:/bin"
+ENV PATH="/home/appuser/.local/bin:$PATH"
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --break-system-packages --no-cache-dir -r requirements.txt
 
-ENV DISPLAY :1
-ADD run.sh /run.sh
-RUN chmod a+x /run.sh
-
-CMD ["/run.sh"]
+CMD ["gunicorn", "-b", "0.0.0.0:8088", "main:server", "--limit-request-line", "0", "--timeout", "200", "--worker-class", "gevent"]

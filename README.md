@@ -48,6 +48,8 @@ services:
   chatgpt:
     image: sheepgreen/chatgpt-html #如果是arm架构，请换成chatgpt-html:arm
     container_name: htmchat
+#    environment:
+#      - CHATGPT_BASE_URL=你的代理服务端地址（不填默认使用作者服务器，目前偶尔会不可用）
     volumes:
       - ./config.json:/chatgpt-html/config.json
 #      - ./chat.html:/chatgpt-html/templates/chat.html #默认内置我的UI，如需替换自用网页请取消注释

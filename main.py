@@ -12,7 +12,6 @@ chatbot = Chatbot(config)
 
 def generate_response(prompt):
     try:
-        response = ""
         for data in chatbot.ask(prompt):
             response = data["message"]
         return response
@@ -21,6 +20,7 @@ def generate_response(prompt):
 
 @server.route("/")
 def home():
+    chatbot.reset_chat()
     return render_template("chat.html")
 
 @server.route("/get")

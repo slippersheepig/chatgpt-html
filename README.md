@@ -25,20 +25,20 @@
 - 新建`config.json`文件，粘贴以下代码并保存
 ```bash
 {
-        //邮箱、session_token和access_token三选一，不用的注释或删掉，注意最后一行删掉逗号
-        //邮箱认证
-        "email": "填写你的OpenAI账号（即邮箱）",
-        "password": "填写你的OpenAI密码"
-        //session_token认证
-        "session_token": "..."
-        //access_token认证
-        "access_token": "<access_token>"
+        "__comment01__": "邮箱、session_token和access_token三选一，不用的删掉（包括注释），注意最后一行删掉逗号",
+        "__comment02__": "邮箱认证",
+        "email": "",
+        "password": "",
+        "__comment03__": "session_token认证",
+        "session_token": "",
+        "__comment04__": "access_token认证",
+        "access_token": "",
         
-        //以下为选填字段
-        //通过代理连接代理端（作者服务器被墙过，代理好像只能用无密码认证的socks5或者http，请自行测试）
-        //# "proxy": "..."
-        //使用付费openai账号（官方称速度更快，无频率限制）
-        //# "paid": true
+        "__comment05__": "以下为选填字段",
+        "__comment06__": "通过代理连接代理端（作者服务器被墙过，代理好像只能用无密码认证的socks5或者http，请自行测试）",
+        "proxy": "",
+        "__comment07__": "使用付费openai账号（官方称速度更快，无频率限制，将false改为true）",
+        "paid": false
 }
 ```
  - session_token获取方法（随时过期）

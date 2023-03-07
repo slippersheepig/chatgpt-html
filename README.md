@@ -1,5 +1,6 @@
 > **Warning** 为维持docker镜像的小体积，本分支不再更新revChatGPT版本，除非作者对依赖做了调整（并没有怪作者的意思，相反，很感谢他做的贡献，致敬）
 # Update
+ - 2023.3.7 小改代码，实现多用户独立会话互不干扰，并且不影响每个用户的连续对话（临时性方案，等作者重写核心代码）
  - 2023.3.3 现支持按回车发送问题请求，按shift+回车可换行输入文本
 + 2023.2.28 关于OPENAI允许问题的最大长度
   + 根据OPENAI官方[问答](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)"Depending on the [model](https://platform.openai.com/docs/models/gpt-3) used, requests can use up to 4097 tokens shared between prompt and completion. If your prompt is 4000 tokens, your completion can be 97 tokens at most"，虽然没有明确指出ChatGPT模型是否也适用，但结合谷歌搜索的结果，应该一样。问题和回答加起来的总长度无法超过4097个token，如果你不清楚自己问题的长度，可以使用[官方计数器](https://platform.openai.com/tokenizer)

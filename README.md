@@ -18,7 +18,7 @@
 - 新建`config.json`文件，粘贴以下代码并保存
 ```bash
 {
-        "__comment01__": "邮箱、session_token和access_token三选一，不用的删掉（包括注释），注意最后一行删掉逗号",
+        "__comment01__": "邮箱、session_token和access_token三选一",
         "__comment02__": "邮箱认证",
         "email": "",
         "password": "",

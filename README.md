@@ -1,4 +1,5 @@
 # Update
+ - 2023.3.8 为缓解 https://chat.sheepig.top 主站压力，新增 https://1.sheepig.top 及 https://2.sheepig.top 两个备站
  - 2023.3.7 小改代码，实现多用户独立会话互不干扰，并且不影响每个用户的连续对话（临时性方案，等作者重写核心代码）
  - 2023.3.6 作者删除了浏览器模拟登录版本，~~后续也把官方endpoint公开了~~（改回去了，据说是有人反馈直连速度变慢），故将主分支做一次大更新（由于“被迫”安装了无用的依赖，此主分支的镜像体积比[proxy分支](https://github.com/slippersheepig/chatgpt-html/tree/proxy)约大10倍，但是相比有bug被修复，镜像大点倒也无所谓了）
  - 2023.3.3 现支持按回车发送问题请求，按shift+回车可换行输入文本

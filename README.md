@@ -5,7 +5,7 @@
 ![~@M18}0M{LXG6$`5{ZDG{XU](https://user-images.githubusercontent.com/58287293/225894846-a5cb608a-3f1f-4740-ac86-c3601b1a3ad5.png)
 - 2023.3.15 疑似大批账号使用[V1](https://github.com/acheong08/ChatGPT/issues/1158)被封，建议`暂时不要使用我的项目`，推荐使用[pandora](https://github.com/pengzhile/pandora)，[演示站](https://v.sheepig.top)
 - 2023.3.7 小改代码，实现多用户独立会话互不干扰，并且不影响每个用户的连续对话（临时性方案，等作者重写核心代码）
-- 2023.3.6 作者删除了浏览器模拟登录版本，~~后续也把官方endpoint公开了~~（改回去了，据说是有人反馈直连速度变慢），故将主分支做一次大更新（由于“被迫”安装了无用的依赖，此主分支的镜像体积比[proxy分支](https://github.com/slippersheepig/chatgpt-html/tree/proxy)约大10倍，但是相比有bug被修复，镜像大点倒也无所谓了）
+- 2023.3.6 作者删除了浏览器模拟登录版本，~~后续也把官方endpoint公开了~~（改回去了，据说是有人反馈直连速度变慢），故将主分支做一次大更新（~~由于“被迫”安装了无用的依赖，此主分支的镜像体积比[proxy分支](https://github.com/slippersheepig/chatgpt-html/tree/proxy)约大10倍，但是相比有bug被修复，镜像大点倒也无所谓了~~）
 - 2023.3.3 现支持按回车发送问题请求，按shift+回车可换行输入文本
 - 2023.2.28 关于OPENAI允许问题的最大长度
   + 根据OPENAI官方[问答](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)"Depending on the [model](https://platform.openai.com/docs/models/gpt-3) used, requests can use up to 4097 tokens shared between prompt and completion. If your prompt is 4000 tokens, your completion can be 97 tokens at most"，虽然没有明确指出ChatGPT模型是否也适用，但结合谷歌搜索的结果，应该一样。问题和回答加起来的总长度无法超过4097个token，如果你不清楚自己问题的长度，可以使用[官方计数器](https://platform.openai.com/tokenizer)

@@ -1,4 +1,5 @@
 # Update
+- 2023.3.23 镜像分支合并，不再用tag区分
 - 2023.3.17 进入平静期，降低更新频率
   + 出于玩玩bing的chatgpt心态，按[waylaidwanderer](https://github.com/waylaidwanderer/PandoraAI)搞了一套[测试站](https://ai.sheepig.top)（需要先点击聊天框左边的图标切换模型，默认模型是API，我的KEY没额度了），`Bing`就是GPT-4，`Sydney`是“破解”过的Bing（没有每轮对话最多15次和每天对话最多150次的限制，但是智商差一点）。另外此项目代码也有bug需要完善（如果你去体验会发现的），不做详细介绍。
 ![RIVG68}0DCNFD)8MH@OO%W2](https://user-images.githubusercontent.com/58287293/225894449-34e4fde8-8add-4674-8231-c78c6025a913.png)
@@ -51,7 +52,7 @@
 ```bash
 services:
   chatgpt:
-    image: sheepgreen/chatgpt-html #如果是arm架构，请换成chatgpt-html:arm
+    image: sheepgreen/chatgpt-html
     container_name: htmchat
 #    environment:
 #      - CHATGPT_BASE_URL=你的代理服务端地址（不填默认使用作者服务器，目前偶尔会不可用）

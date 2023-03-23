@@ -4,7 +4,7 @@
   + 出于玩玩bing的chatgpt心态，按[waylaidwanderer](https://github.com/waylaidwanderer/PandoraAI)搞了一套[测试站](https://ai.sheepig.top)（需要先点击聊天框左边的图标切换模型，默认模型是API，我的KEY没额度了），`Bing`就是GPT-4，`Sydney`是“破解”过的Bing（没有每轮对话最多15次和每天对话最多150次的限制，但是智商差一点）。另外此项目代码也有bug需要完善（如果你去体验会发现的），不做详细介绍。
 ![RIVG68}0DCNFD)8MH@OO%W2](https://user-images.githubusercontent.com/58287293/225894449-34e4fde8-8add-4674-8231-c78c6025a913.png)
 ![~@M18}0M{LXG6$`5{ZDG{XU](https://user-images.githubusercontent.com/58287293/225894846-a5cb608a-3f1f-4740-ac86-c3601b1a3ad5.png)
-- 2023.3.15 ~~疑似大批账号使用[V1](https://github.com/acheong08/ChatGPT/issues/1158)被封，建议`暂时不要使用我的项目`~~好像暂时没事了，不过还是推荐使用[pandora](https://github.com/pengzhile/pandora)，[演示站](https://v.sheepig.top)
+- 2023.3.15 ~~疑似大批账号使用[V1](https://github.com/acheong08/ChatGPT/issues/1158)被封，建议`暂时不要使用我的项目`~~ 好像暂时没事了，不过还是推荐使用[pandora](https://github.com/pengzhile/pandora)，[演示站](https://v.sheepig.top)
 - 2023.3.7 小改代码，实现多用户独立会话互不干扰，并且不影响每个用户的连续对话（临时性方案，等作者重写核心代码）
 - 2023.3.6 作者删除了浏览器模拟登录版本，~~后续也把官方endpoint公开了~~（改回去了，据说是有人反馈直连速度变慢），故将主分支做一次大更新（~~由于“被迫”安装了无用的依赖，此主分支的镜像体积比[proxy分支](https://github.com/slippersheepig/chatgpt-html/tree/proxy)约大10倍，但是相比有bug被修复，镜像大点倒也无所谓了~~）
 - 2023.3.3 现支持按回车发送问题请求，按shift+回车可换行输入文本

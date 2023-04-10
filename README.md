@@ -54,6 +54,7 @@ services:
 - 访问地址为http://ip:port
 - 修改`chat.html`文件后，需要docker restart htmchat才能生效
 ## 其他相关
+- [ChatGPT电报机器人](https://github.com/slippersheepig/chatgpt-telegram-bot)，[ChatGPT企业微信应用机器人](https://github.com/slippersheepig/chatgpt-bizwechat-bot)，[ChatGPT的QQ频道机器人DOCKER版](https://github.com/slippersheepig/QQChannelChatGPT)，[微软BING电报机器人DOCKER版](https://github.com/slippersheepig/BingChatBot)，[谷歌BARD网页版](https://github.com/slippersheepig/bard-web)，[谷歌BARD电报机器人](https://github.com/slippersheepig/bard-telegram-bot)
 - 出于玩玩bing的chatgpt心态，按[waylaidwanderer](https://github.com/waylaidwanderer/PandoraAI)搞了一套[测试站](https://ai.sheepig.top)（需要先点击聊天框左边的图标切换模型，默认模型是API，我的KEY没额度了），`Bing`就是GPT-4，`Sydney`是“破解”过的Bing（没有每轮对话最多15次和每天对话最多150次的限制，但是智商差一点）。另外此项目代码也有bug需要完善（如果你去体验会发现的），不做详细介绍。
 ![RIVG68}0DCNFD)8MH@OO%W2](https://user-images.githubusercontent.com/58287293/225894449-34e4fde8-8add-4674-8231-c78c6025a913.png)
 ![~@M18}0M{LXG6$`5{ZDG{XU](https://user-images.githubusercontent.com/58287293/225894846-a5cb608a-3f1f-4740-ac86-c3601b1a3ad5.png)

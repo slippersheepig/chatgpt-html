@@ -15,8 +15,8 @@ def generate_response(prompt):
         for data in chatbot.ask(prompt):
             response = data["message"]
         return response
-    except Exception as e:
-        return e
+    except BaseException as e:
+        return str(e)
 
 @server.route("/")
 def home():

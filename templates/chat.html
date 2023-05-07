@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 
 <!--自适应屏幕大小-->
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -8,15 +8,17 @@
     <meta charset="UTF-8">
     <title>ChatGPT</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!--引入animate.css库-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
 <div align="center">
-    <div class="chat_window">
+    <div class="chat_window" style="height: 100%">
         <div class="top_menu">
             <div class="title">ChatGPT</div>
         </div>
-        <ul class="messages">
+        <ul class="messages" style="height: calc(100% - 140px)">
             <div style="text-align: left; color: green">
                 <pre style="white-space: pre-wrap; word-wrap:break-word" id="chatlog"></pre>
             </div>

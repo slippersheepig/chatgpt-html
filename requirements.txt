@@ -1,4 +1,4 @@
-revChatGPT==5.2.0
+revChatGPT
 flask
 gunicorn
 gevent

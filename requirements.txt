@@ -1,3 +1,4 @@
+openaiauth==1.0.2
 revChatGPT==5.2.0
 flask
 gunicorn

@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:3.10-alpine
 RUN apk add --no-cache build-base libffi-dev
 WORKDIR /chatgpt-html
 COPY . .

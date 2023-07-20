@@ -1,6 +1,8 @@
 # chatgpt-html
 ### 使用[acheong08](https://github.com/acheong08/ChatGPT)对接官方ChatGPT接口，实现简单HTML网页版在线聊天
 > 该版本基于`ChatGPT`网页端代理开发（免费），想使用ChatGPT API KEY（付费）的请访问[chatgpt-web](https://github.com/slippersheepig/chatgpt-web)
+### 注意
+> 使用该项目的前提是你的服务器IP没有被BAN，由于我自己的服务器IP已BAN，无法测试项目是否可用，请自行尝试
 ## 特性
 - 文件结构简单，主要面向小白用户
 - 功能不多，但核心的连续对话、多用户会话隔离、markdown格式输出都具备
